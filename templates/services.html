@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact Us</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background-color: #333;
+            color: white;
+            margin:0px;
+            padding:0px;
+        }
+        header{
+            text-align: center;
+            background-image: linear-gradient(black, rgb(97, 96, 96));
+            color: aliceblue;
+            padding: 20px 0;
+        }
+        nav {
+            margin-top: 15px;
+        }
+        #main{
+            color: aliceblue;
+            text-decoration: none;
+            padding: 0 15px;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+        #main:hover{
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Services</h1>
+        <nav>
+            <a href="{% url 'task' %}" id="main">Home</a>
+            <a href="{% url 'services' %}" id="main">Services</a>
+            <a href="{% url 'about' %}" id="main">About</a>
+            <a href="{% url 'contact' %}" id="main">Contact</a>
+        </nav>
+    </header>
+    <div>
+        <h1>Services</h1>
+        <p>We Provide time management services</p>
+    </div>
+</body>
+</html>

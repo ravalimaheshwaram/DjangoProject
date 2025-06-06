@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family:Arial, sans-serif;
+            background-color:#333;
+            color:white;
+            margin:0;
+            padding: 0;
+        }
+        header {
+            text-align: center;
+            background-image: linear-gradient(black, rgb(97, 96, 96));
+            color: aliceblue;
+            padding: 20px 0;
+        }
+        nav {
+            margin-top: 15px;
+        }
+        #main {
+            color: aliceblue;
+            text-decoration: none;
+            padding: 0 15px;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+        #main:hover {
+            color: #4CAF50;
+        }
+        .content {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        form {
+            background-color: rgba(97, 96, 96, 0.5);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        input, textarea {
+            width: 80%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 4px;
+            background-color: #555;
+            color: white;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: rgba(97, 96, 96, 0.3);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>To-Do List</h1>
+        <nav>
+            <a href="{% url 'task' %}" id="main">Home</a>
+            <a href="{% url 'services' %}" id="main">Services</a>
+            <a href="{% url 'about' %}" id="main">About</a>
+            <a href="{% url 'contact' %}" id="main">Contact</a>
+        </nav>
+    </header>
+    
+    <div class="content">
+        {% block content %}
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Add Task</button>
+        </form>
+        
+        <h2>Tasks:</h2>
+        <ul>
+            {% for t in tasks %}
+                <li>
+                    <div>
+                        <strong>{{ t.title }}</strong><br>
+                        {{ t.desc }} | {{ t.time }}
+                    </div>
+                    <div class="task-actions">
+                        <a href="{% url 'update_task' t.id %}">Update</a>
+                        <a href="{% url 'delete_task' t.id %}">Delete</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        {% endblock %}
+    </div>
+</body>
+</html>
